@@ -1,0 +1,98 @@
+class Motor {
+    private int litros_de_aceite;
+    private int potencia;
+
+    public Motor(int potencia) {
+        this.potencia = potencia;
+        this.litros_de_aceite = 0;
+    }
+
+    public int getLitrosDeAceite() {
+        return litros_de_aceite;
+    }
+
+    public void setLitrosDeAceite(int litros_de_aceite) {
+        this.litros_de_aceite = litros_de_aceite;
+    }
+
+    public int getPotencia() {
+        return potencia;
+    }
+
+    public void setPotencia(int potencia) {
+        this.potencia = potencia;
+    }
+}
+
+class Coche {
+    private Motor motor;
+    private String marca;
+    private String modelo;
+    private double precioAverias;
+
+    public Coche(String marca, String modelo, int potenciaMotor) {
+        this.marca = marca;
+        this.modelo = modelo;
+        this.motor = new Motor(potenciaMotor);
+        this.precioAverias = 0.0;
+    }
+
+    public Motor getMotor() {
+        return motor;
+    }
+
+    public String getMarca() {
+        return marca;
+    }
+
+    public String getModelo() {
+        return modelo;
+    }
+
+    public double getPrecioAverias() {
+        return precioAverias;
+    }
+
+    public void acumularAveria(double importe) {
+        this.precioAverias += importe;
+    }
+}
+
+class Garaje {
+    private Coche coche;
+    private String averiaAsociada;
+    private int cochesAtendidos;
+    private boolean ocupado;
+
+    public Garaje() {
+        this.cochesAtendidos = 0;
+        this.ocupado = false;
+    }
+
+    public boolean aceptarCoche(Coche coche, String averia) {
+        if (ocupado) {
+            return false;
+        }
+        this.coche = coche;
+        this.averiaAsociada = averia;
+        this.ocupado = true;
+        cochesAtendidos++;
+        return true;
+    }
+
+    public void devolverCoche() {
+        if (ocupado) {
+            coche = null;
+            averiaAsociada = null;
+            ocupado = false;
+        }
+    }
+
+    public int getCochesAtendidos() {
+        return cochesAtendidos;
+    }
+
+    public boolean isOcupado() {
+        return ocupado;
+    }
+}
